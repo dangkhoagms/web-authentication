@@ -148,7 +148,24 @@
 
 ***document***
 https://symfony.com/doc/current/security/form_login_setup.html  
+
+### 2. working rememberme
+
+***template***
+   
+    <input type="checkbox" id="remember_me" name="_remember_me" />
+***sercurity.yaml***
     
+    
+      remember_me:
+        secret:   '%kernel.secret%'
+        lifetime: 2592000 # 30 days in seconds
+
+### 3. working access with security
+    
+    access_control:
+      - { path: ^/article, roles: ROLE_ADMIN }
+
 # SCRIPT
 
 ### 1. script create AUTH
