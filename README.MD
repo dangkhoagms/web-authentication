@@ -216,6 +216,21 @@ use IS_AUTHENTICATED_ANONYMOUSLY
  template using
     
     <img src="{{ app.user.avatarUrl(150) }}" />
+
+### 6. Working sercurity.yaml
+***config config/packages/security.yaml***  
+
+    role_hierarchy:
+            ROLE_ADMIN: [ROLE_ADMIN_COMMENT,ROLE_ADMIN_ARTICLE]
+***Swich user***
+    
+    switch_user : true
+add add ROLE_ALLOWED_TO_SWITCH
+
+    role_hierarchy:
+            ROLE_ADMIN: [ROLE_ADMIN_COMMENT,ROLE_ADMIN_ARTICLE,ROLE_ALLOWED_TO_SWITCH]
+                
+    
 # SCRIPT
 
 ### 1. script create AUTH

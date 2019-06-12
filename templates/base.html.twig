@@ -6,6 +6,10 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+        <a href="{{ path('article_index',{'_switch_user':'_exit'}) }}">Exit Impersonation</a>
+    {% endif %}
+
     {% if is_granted('ROLE_USER') %}
         <a href="{{ path('article_new') }}">New Article</a> | <a href="{{ path('article_index') }}">List Article</a> | <a href="{{ path('app_logout') }}">Logout</a>
     {% else %}
