@@ -166,6 +166,56 @@ https://symfony.com/doc/current/security/form_login_setup.html
     access_control:
       - { path: ^/article, roles: ROLE_ADMIN }
 
+1. if you wanted to force EVERY URL to be protected
+ use IS_AUTHENTICATED_FULLY
+2. if definitely allow /login to be accessible anonymously
+use IS_AUTHENTICATED_ANONYMOUSLY	
+### 4. working current user
+
+***create BaseController***
+
+    abstract class BaseController extends AbstractController
+    {
+        protected function getUser():User
+        {
+            return parent::getUser();
+        }
+    
+    
+    }
+    
+***AccountController***
+
+    /**
+     * Class AccountController
+     * @IsGranted("ROLE_USER")
+     */
+    class AccountController extends BaseController
+    {
+        /**
+         * @Route("/account", name="app_account")
+         */
+        public function index(LoggerInterface $logger)
+        {
+            $logger->debug('Checking account page for '.$this->getUser()->getEmail());
+            return $this->render('account/index.html.twig', [
+                'controller_name' => 'AccountController',
+            ]);
+        }
+    }
+
+### 5. add method Entity
+
+    public function  getAvatarUrl(string $size = null):string {
+            $url = "https://robohash.org/".$this->getEmail();
+            if($size){
+                $url.=sprintf('?size=%dx%d',$size,$size);
+            }
+            return $url;
+        }
+ template using
+    
+    <img src="{{ app.user.avatarUrl(150) }}" />
 # SCRIPT
 
 ### 1. script create AUTH

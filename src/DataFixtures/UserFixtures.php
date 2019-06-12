@@ -3,12 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixtures extends AppFixtures
+class UserFixtures extends BaseFixtures
 {
     /**
      * @var UserPasswordEncoderInterface
@@ -42,6 +40,7 @@ class UserFixtures extends AppFixtures
                 $user,
                 'engage'
             ));
+            $user->setTwitterUsername($this->faker->userName);
             $user->setRoles($this->faker->randomElements($this->ROLES));
             return $user;
         }

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+        .account-left{
+            float: left;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        <div class="account-left">
+            <img src="{{ app.user.avatarUrl(150) }}" />
+        </div>
+        Wellcome back, {{ app.user.firstName }}
+        {% if app.user.twitterUsername %} <br />
+            twitter:{{ app.user.twitterUsername }}
+        {% endif %}
+        <br />
+
+    </div>
+{% endblock %}

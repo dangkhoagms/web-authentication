@@ -3,7 +3,6 @@
 namespace App\Security;
 
 use App\Repository\UserRepository;
-use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -102,10 +101,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($this->router->generate('article_index'));
     }
 
-    public function start(Request $request, AuthenticationException $authException = null)
-    {
-        return $this->router->generate('app_login');
-    }
 
     public function supportsRememberMe()
     {

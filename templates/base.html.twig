@@ -6,6 +6,11 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('article_new') }}">New Article</a> | <a href="{{ path('article_index') }}">List Article</a> | <a href="{{ path('app_logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ path('app_account') }}">Login</a>
+    {% endif %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
